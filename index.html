@@ -4,77 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seoyun Baek - CV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libertine&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --primary-color: #556B2F; /* OliveGreen */
+            --secondary-color: #191970; /* MidnightBlue */
+            --light-gray: #f4f4f4;
+        }
+
         body {
-            font-family: 'Libertine', serif; /* Use a similar font if Libertine isn't available */
-            line-height: 1.2;
-            margin: 0.8in; /* Adjust margins as needed */
+            font-family: 'Roboto', sans-serif; /* Modern, clean font */
+            line-height: 1.6;
+            margin: 2rem; /* Increased margins */
+            color: #333; /* Darker text for better contrast */
+            background-color: #fff;
         }
+
         h1, h2, h3 {
-            color: #556B2F; /* OliveGreen */
+            color: var(--primary-color);
         }
+
         h1 {
-            font-size: 2em;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
+
         h2 {
-            font-size: 1.5em;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed; /* Important for fixed column widths */
-        }
-        td {
-            padding: 0.5em 10px; /* Adjust padding */
-            vertical-align: top;
-        }
-        td:first-child {
-            width: 1in; /* Date column width */
-            text-align: right;
-            padding-right: 0;
-        }
-        td:last-child {
-            width: 5.2in; /* Content column width */
-        }
-        .section {
-           margin-bottom: 1em;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--light-gray); /* Subtle divider */
+            padding-bottom: 0.5rem;
+
         }
 
         a {
-            color: #191970; /* MidnightBlue */
+            color: var(--secondary-color);
             text-decoration: none;
-        }
-        .entry {
-            margin-bottom: 0.6em; /* Space between entries */
-        }
-        .multiline-entry {
-            margin-bottom: 1em; /* Space between multi-line entries */
-        }
-        .award-description {
-            font-style: italic;
-            font-size: smaller;
+            transition: color 0.3s ease; /* Smooth color transition on hover */
         }
 
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            padding: 0.8rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--light-gray); /* Add borders to table cells */
+        }
+
+        th {
+          width: 2.5in;
+          font-weight: 500;
+        }
+
+        .award-description {
+            font-style: italic;
+            color: #777; /* Slightly lighter gray for descriptions */
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skills-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            margin-bottom: 2rem;
+        }
+
+        /* Responsive design tweaks */
+        @media (max-width: 768px) {
+            body {
+                margin: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto; /* Horizontal scrolling for smaller screens */
+            }
+            th {
+              width: auto;
+            }
+
+        }
     </style>
 </head>
 <body>
 
-    <div class="section">
+    <section class="contact-info">
         <h1>Seoyun Baek</h1>
         <p><a href="mailto:ican0534@kaist.ac.kr">ican0534@kaist.ac.kr</a><br>
            Citizenship: South Korea</p>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Research interests</h2>
         <p>Data Science, Machine Learning, Financial Engineering</p>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Education</h2>
         <table>
             <tr>
-                <td>2025 -- Present</td>
+                <th>2025 -- Present</th>
                 <td>
                     <strong>KAIST(Korea Advanced Insitute of Science and Technology)</strong> -- Daejeon, S.Korea<br>
                     BS in Industrial and System Engineering (Expected, currently in School of Freshman)<br>
@@ -82,27 +142,27 @@
                 </td>
             </tr>
             <tr>
-                <td>2022 -- 2025</td>
+                <th>2022 -- 2025</th>
                 <td>
                     <strong>Korean Minjok Leadership Academy</strong> -- Gangwon-do, S.Korea<br>
                     High School Diploma(Domestic Track)
                 </td>
             </tr>
         </table>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Honors and scholarships</h2>
         <table>
             <tr>
-                <td>2024</td>
+                <th>2024</th>
                 <td>
                     The 8th International Youth Research Paper Competition Excellence Award (HOBY)<br>
                     <span class="award-description">3rd Place among 300+ Papers Submitted Worldwide.</span>
                 </td>
             </tr>
             <tr>
-                <td>2024</td>
+                <th>2024</th>
                 <td>
                     International Science and Engineering Fair(ISEF) Finalist (Regeneron)<br>
                     <span class="award-description">World's biggest science fair led by Sociecy for Science.</span><br>
@@ -110,14 +170,14 @@
                 </td>
             </tr>
             <tr>
-                <td>2024</td>
+                <th>2024</th>
                 <td>
                     The 4th Industrial Revolution POWER KOREA Scholarship for Talented (The National Assembly of Korea)<br>
                     <span class="award-description">Selected as one of the top two national scholarship recipients, recognized for outstanding achievements in Science and Engineering.</span>
                 </td>
             </tr>
             <tr>
-                <td>2023</td>
+                <th>2023</th>
                 <td>
                     Korea Science and Engineering Fair(KSEF) 1st Award (KSS)<br>
                     <span class="award-description">Biggest science fair in South Korea.</span><br>
@@ -125,27 +185,27 @@
                 </td>
             </tr>
             <tr>
-                <td>2023</td>
+                <th>2023</th>
                 <td>
                     7th Supercomputing Youth Camp Grand Award (KISTI & UNIST)<br>
                     <span class="award-description">1st place among 300+ participants nationwide.</span>
                 </td>
             </tr>
             <tr>
-                <td>2023</td>
+                <th>2023</th>
                 <td>
                     National Student Global Economics Debate Competition 2nd Award (Kyeonggi Ilbo)<br>
                     <span class="award-description">A parliamentary debate competition conducted on South Korea's economic issues.</span>
                 </td>
             </tr>
         </table>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Publications</h2>
         <table>
             <tr>
-                <td>2024</td>
+                <th>2024</th>
                 <td>
                     <strong>Dynamic Asset Allocation with Markowitz Theory and Proximal Policy Optimization</strong><br>
                     Seoyun Baek.<br>
@@ -153,7 +213,7 @@
                 </td>
             </tr>
              <tr>
-                <td>2024</td>
+                <th>2024</th>
                 <td>
                     <strong>Emotion Recognition Device for Visually Impaired</strong><br>
                     Seoyun Baek, Jungwoo Brian Kim, Jihoon Oh.<br>
@@ -161,13 +221,13 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Research experience</h2>
         <table>
             <tr>
-                <td>2025.06 -- 2025.10</td>
+                <th>2025.06 -- 2025.10</th>
                 <td>
                     <strong>Pre-Undergraduate Research Program, KAIST Neuro Machine Augmented Intelligence Lab</strong><br>
                     Mentors: Professor Sungho Jo (KAIST).<br>
@@ -175,37 +235,29 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Talks and tutorials</h2>
         <table>
             <tr>
-                <td>2025.02</td>
+                <th>2025.02</th>
                 <td>
                     Freshman Representative Speech<br>
                     <span class="award-description">Selected to represent over 800 freshmen as the speaker for the KAIST entrance ceremony.</span>
                 </td>
             </tr>
         </table>
-    </div>
+    </section>
 
-    <div class="section">
+    <section class="section">
         <h2>Technical skills</h2>
-        <p>
-            <strong>Programming languages</strong><br>
-            Proficient in: Python, JAVA, C<br>
-            Familiar with: C++, C#
-        </p>
-        <p>
-            <strong>Frameworks</strong><br>
-            Tensorflow, Pytorch, Numpy, Pandas
-        </p>
-        <p>
-            <strong>Languages</strong><br>
-            Korean(fluent), English(advanced)
-        </p>
-    </div>
+        <ul class="skills-list">
+            <li><strong>Programming languages:</strong> Python, JAVA, C (Proficient), C++, C# (Familiar)</li>
+            <li><strong>Frameworks:</strong> Tensorflow, Pytorch, Numpy, Pandas</li>
+            <li><strong>Languages:</strong> Korean (Fluent), English (Advanced)</li>
+        </ul>
+    </section>
 
 </body>
 </html>
