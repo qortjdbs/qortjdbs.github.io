@@ -6,128 +6,206 @@
     <title>Seoyun Baek - CV</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 50px auto;
-            width: 80%;
-            max-width: 900px;
-            line-height: 1.8;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Libertine', serif; /* Use a similar font if Libertine isn't available */
+            line-height: 1.2;
+            margin: 0.8in; /* Adjust margins as needed */
+        }
+        h1, h2, h3 {
+            color: #556B2F; /* OliveGreen */
         }
         h1 {
-            text-align: center;
-            color: #2E8B57;
+            font-size: 2em;
+        }
+        h2 {
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Important for fixed column widths */
+        }
+        td {
+            padding: 0.5em 10px; /* Adjust padding */
+            vertical-align: top;
+        }
+        td:first-child {
+            width: 1in; /* Date column width */
+            text-align: right;
+            padding-right: 0;
+        }
+        td:last-child {
+            width: 5.2in; /* Content column width */
         }
         .section {
-            margin-bottom: 30px;
+           margin-bottom: 1em;
         }
-        .section-title {
-            font-size: 26px;
-            font-weight: bold;
-            border-bottom: 3px solid #2E8B57;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
+
+        a {
+            color: #191970; /* MidnightBlue */
+            text-decoration: none;
         }
         .entry {
-            margin-bottom: 15px;
+            margin-bottom: 0.6em; /* Space between entries */
         }
-        .date {
-            font-weight: bold;
-            color: #555;
+        .multiline-entry {
+            margin-bottom: 1em; /* Space between multi-line entries */
         }
+        .award-description {
+            font-style: italic;
+            font-size: smaller;
+        }
+
     </style>
 </head>
 <body>
-    <h1>Seoyun Baek</h1>
-    <p>Email: ican0534@kaist.ac.kr</p>
-    <p>Citizenship: South Korea</p>
-    
+
     <div class="section">
-        <div class="section-title">Research Interests</div>
+        <h1>Seoyun Baek</h1>
+        <p><a href="mailto:ican0534@kaist.ac.kr">ican0534@kaist.ac.kr</a><br>
+           Citizenship: South Korea</p>
+    </div>
+
+    <div class="section">
+        <h2>Research interests</h2>
         <p>Data Science, Machine Learning, Financial Engineering</p>
     </div>
-    
+
     <div class="section">
-        <div class="section-title">Education</div>
-        <div class="entry">
-            <span class="date">2025 - Present</span><br>
-            <strong>KAIST (Korea Advanced Institute of Science and Technology)</strong> - Daejeon, South Korea<br>
-            BS in Industrial and System Engineering (Expected, currently in School of Freshman)
-        </div>
-        <div class="entry">
-            <span class="date">2022 - 2025</span><br>
-            <strong>Korean Minjok Leadership Academy</strong> - Gangwon-do, South Korea<br>
-            High School Diploma (Domestic Track)
-        </div>
+        <h2>Education</h2>
+        <table>
+            <tr>
+                <td>2025 -- Present</td>
+                <td>
+                    <strong>KAIST(Korea Advanced Insitute of Science and Technology)</strong> -- Daejeon, S.Korea<br>
+                    BS in Industrial and System Engineering (Expected, currently in School of Freshman)<br>
+                    Mentors: TBD.
+                </td>
+            </tr>
+            <tr>
+                <td>2022 -- 2025</td>
+                <td>
+                    <strong>Korean Minjok Leadership Academy</strong> -- Gangwon-do, S.Korea<br>
+                    High School Diploma(Domestic Track)
+                </td>
+            </tr>
+        </table>
     </div>
-    
+
     <div class="section">
-        <div class="section-title">Honors and Scholarships</div>
-        <div class="entry">
-            <span class="date">2024</span><br>
-            The 8th International Youth Research Paper Competition Excellence Award (HOBY)<br>
-            <em>3rd Place among 300+ Papers Submitted Worldwide</em>
-        </div>
-        <div class="entry">
-            <span class="date">2024</span><br>
-            International Science and Engineering Fair (ISEF) Finalist (Regeneron)<br>
-            <em>World's biggest science fair led by Society for Science. Project Category: Embedded Systems (Sponsored by HP)</em>
-        </div>
-        <div class="entry">
-            <span class="date">2024</span><br>
-            The 4th Industrial Revolution POWER KOREA Scholarship for Talented (The National Assembly of Korea)<br>
-            <em>Selected as one of the top two national scholarship recipients, recognized for outstanding achievements in Science and Engineering</em>
-        </div>
-        <div class="entry">
-            <span class="date">2023</span><br>
-            Korea Science and Engineering Fair (KSEF) 1st Award (KSS)<br>
-            <em>Biggest science fair in South Korea. Project Category: Invention (Convergence Science)</em>
-        </div>
-        <div class="entry">
-            <span class="date">2023</span><br>
-            7th Supercomputing Youth Camp Grand Award (KISTI & UNIST)<br>
-            <em>1st place among 300+ participants nationwide</em>
-        </div>
-        <div class="entry">
-            <span class="date">2023</span><br>
-            National Student Global Economics Debate Competition 2nd Award (Gyeonggi Ilbo)<br>
-            <em>A parliamentary debate competition conducted on South Korea's economic issues</em>
-        </div>
+        <h2>Honors and scholarships</h2>
+        <table>
+            <tr>
+                <td>2024</td>
+                <td>
+                    The 8th International Youth Research Paper Competition Excellence Award (HOBY)<br>
+                    <span class="award-description">3rd Place among 300+ Papers Submitted Worldwide.</span>
+                </td>
+            </tr>
+            <tr>
+                <td>2024</td>
+                <td>
+                    International Science and Engineering Fair(ISEF) Finalist (Regeneron)<br>
+                    <span class="award-description">World's biggest science fair led by Sociecy for Science.</span><br>
+                    <span class="award-description">Project Category: Embedded Systems (Sponsored by HP)</span>
+                </td>
+            </tr>
+            <tr>
+                <td>2024</td>
+                <td>
+                    The 4th Industrial Revolution POWER KOREA Scholarship for Talented (The National Assembly of Korea)<br>
+                    <span class="award-description">Selected as one of the top two national scholarship recipients, recognized for outstanding achievements in Science and Engineering.</span>
+                </td>
+            </tr>
+            <tr>
+                <td>2023</td>
+                <td>
+                    Korea Science and Engineering Fair(KSEF) 1st Award (KSS)<br>
+                    <span class="award-description">Biggest science fair in South Korea.</span><br>
+                    <span class="award-description">Project Category: Invention (Convergence Science).</span>
+                </td>
+            </tr>
+            <tr>
+                <td>2023</td>
+                <td>
+                    7th Supercomputing Youth Camp Grand Award (KISTI & UNIST)<br>
+                    <span class="award-description">1st place among 300+ participants nationwide.</span>
+                </td>
+            </tr>
+            <tr>
+                <td>2023</td>
+                <td>
+                    National Student Global Economics Debate Competition 2nd Award (Kyeonggi Ilbo)<br>
+                    <span class="award-description">A parliamentary debate competition conducted on South Korea's economic issues.</span>
+                </td>
+            </tr>
+        </table>
     </div>
-    
+
     <div class="section">
-        <div class="section-title">Publications</div>
-        <div class="entry">
-            <span class="date">2024</span><br>
-            <strong>Dynamic Asset Allocation with Markowitz Theory and Proximal Policy Optimization</strong><br>
-            Seoyun Baek. <em>KNOWLEDGE TO LEAD (ISSN: 2765-0626) Volume 5 Issue 1, pp.17-22</em>
-        </div>
-        <div class="entry">
-            <span class="date">2024</span><br>
-            <strong>Emotion Recognition Device for Visually Impaired</strong><br>
-            Seoyun Baek, Jungwoo Brian Kim, Jihoon Oh.<br>
-            <em>International Journal of STEAM vol. 15, No. 1, (2024), pp.80-83</em>
-        </div>
+        <h2>Publications</h2>
+        <table>
+            <tr>
+                <td>2024</td>
+                <td>
+                    <strong>Dynamic Asset Allocation with Markowitz Theory and Proximal Policy Optimization</strong><br>
+                    Seoyun Baek.<br>
+                    <span class="award-description">KNOWLEDGE TO LEAD (ISSN: 2765-0626) Volume 5 Issue 1, pp.17~22.</span>
+                </td>
+            </tr>
+             <tr>
+                <td>2024</td>
+                <td>
+                    <strong>Emotion Recognition Device for Visually Impaired</strong><br>
+                    Seoyun Baek, Jungwoo Brian Kim, Jihoon Oh.<br>
+                    <span class="award-description">International Journal of STEAM vol. 15, No. 1, (2024), pp.80~83.</span>
+                </td>
+            </tr>
+        </table>
     </div>
-    
+
     <div class="section">
-        <div class="section-title">Talks and Tutorials</div>
-        <div class="entry">
-            <span class="date">2025.02</span><br>
-            <strong>Freshman Representative Speech</strong><br>
-            <em>Selected to represent over 800 freshmen as the speaker for the KAIST entrance ceremony.</em>
-        </div>
+        <h2>Research experience</h2>
+        <table>
+            <tr>
+                <td>2025.06 -- 2025.10</td>
+                <td>
+                    <strong>Pre-Undergraduate Research Program, KAIST Neuro Machine Augmented Intelligence Lab</strong><br>
+                    Mentors: Professor Sungho Jo (KAIST).<br>
+                    Developed a hybrid reinforcement learning-based autonomous driving system, integrating Proximal Policy Optimization for dynamic decision-making and real-time adaptation in complex environments.
+                </td>
+            </tr>
+        </table>
     </div>
-    
+
     <div class="section">
-        <div class="section-title">Technical Skills</div>
-        <ul>
-            <li><strong>Programming languages:</strong> Python, Java, C (Proficient); C++, C# (Familiar)</li>
-            <li><strong>Frameworks:</strong> TensorFlow, PyTorch, NumPy, Pandas</li>
-            <li><strong>Languages:</strong> Korean (Fluent), English (Advanced)</li>
-        </ul>
+        <h2>Talks and tutorials</h2>
+        <table>
+            <tr>
+                <td>2025.02</td>
+                <td>
+                    Freshman Representative Speech<br>
+                    <span class="award-description">Selected to represent over 800 freshmen as the speaker for the KAIST entrance ceremony.</span>
+                </td>
+            </tr>
+        </table>
     </div>
+
+    <div class="section">
+        <h2>Technical skills</h2>
+        <p>
+            <strong>Programming languages</strong><br>
+            Proficient in: Python, JAVA, C<br>
+            Familiar with: C++, C#
+        </p>
+        <p>
+            <strong>Frameworks</strong><br>
+            Tensorflow, Pytorch, Numpy, Pandas
+        </p>
+        <p>
+            <strong>Languages</strong><br>
+            Korean(fluent), English(advanced)
+        </p>
+    </div>
+
 </body>
 </html>
