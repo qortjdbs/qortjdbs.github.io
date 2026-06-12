@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seoyun Baek — ML & CV Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Tokens ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f14;
+      --bg2:       #13161e;
+      --bg3:       #1a1f2e;
+      --border:    rgba(255,255,255,0.07);
+      --text:      #e8eaf0;
+      --muted:     #8b90a0;
+      --accent:    #5b8dee;
+      --accent2:   #8b5cf6;
+      --grad:      linear-gradient(135deg, #5b8dee, #8b5cf6);
+      --radius:    14px;
+      --nav-h:     64px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: #88aaff; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 99px; }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(13,15,20,0.75);
+      border-bottom: 1px solid var(--border);
+      z-index: 999;
+      display: flex; align-items: center;
+    }
+    .nav-inner {
+      max-width: 1100px; margin: 0 auto; padding: 0 32px;
+      width: 100%;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1rem; letter-spacing: -0.01em;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links {
+      display: flex; gap: 8px; list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 6px 12px; border-radius: 8px;
+      transition: color .2s, background .2s;
+    }
+    .nav-links a:hover {
+      color: var(--text); background: var(--bg3);
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: calc(var(--nav-h) + 60px) 32px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+    }
+    .hero-glow-1 {
+      background: rgba(91,141,238,0.15);
+      top: -100px; right: -100px;
+    }
+    .hero-glow-2 {
+      background: rgba(139,92,246,0.12);
+      bottom: -80px; left: 10%;
+    }
+
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 380px; gap: 60px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-text .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(91,141,238,0.12);
+      border: 1px solid rgba(91,141,238,0.25);
+      color: var(--accent); font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 99px;
+      margin-bottom: 24px;
+    }
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .5; transform: scale(.8); }
+    }
+
+    .hero-text h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+    .hero-text h1 span {
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text .bio {
+      font-size: 1.05rem; color: var(--muted); max-width: 520px;
+      line-height: 1.8; margin-bottom: 36px;
+    }
+    .hero-text .bio strong { color: var(--text); font-weight: 600; }
+
+    .hero-cta {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      transition: all .2s; border: none;
+    }
+    .btn-primary {
+      background: var(--grad); color: #fff;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); color: #fff; }
+    .btn-ghost {
+      background: var(--bg3); color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: var(--bg2); transform: translateY(-1px); color: var(--text); }
+
+    /* ── Hero Photo ── */
+    .hero-photo-wrap {
+      position: relative;
+      display: flex; justify-content: center;
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute; inset: -2px;
+      border-radius: 28px;
+      background: var(--grad);
+      z-index: 0;
+    }
+    .hero-photo-wrap::after {
+      content: '';
+      position: absolute; inset: -20px;
+      border-radius: 32px;
+      background: var(--grad);
+      opacity: .15;
+      filter: blur(24px);
+      z-index: -1;
+    }
+    .hero-photo-wrap img {
+      width: 100%; max-width: 360px;
+      aspect-ratio: 3/4; object-fit: cover; object-position: top center;
+      border-radius: 26px;
+      position: relative; z-index: 1;
+      display: block;
+    }
+
+    /* ── Section common ── */
+    section { padding: 100px 32px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: #fff; margin-bottom: 48px; line-height: 1.2;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      height: 1px; background: var(--border);
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    /* ── Stats strip ── */
+    .stats {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 32px;
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2rem; font-weight: 700; color: #fff;
+      background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 6px; letter-spacing: 0.04em; }
+
+    /* ── Experience timeline ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 0 40px; position: relative;
+      padding-bottom: 40px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-date {
+      font-size: 0.82rem; font-weight: 500; color: var(--muted);
+      text-align: right; padding-top: 6px;
+      line-height: 1.4;
+    }
+    .tl-right { border-left: 1px solid var(--border); padding-left: 36px; position: relative; }
+    .tl-right::before {
+      content: '';
+      position: absolute; left: -5px; top: 8px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+    }
+    .tl-title { font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 2px; }
+    .tl-org { font-size: 0.87rem; color: var(--accent); margin-bottom: 12px; font-weight: 500; }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li {
+      font-size: 0.9rem; color: var(--muted);
+      padding-left: 16px; position: relative; margin-bottom: 6px;
+    }
+    .tl-bullets li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--accent); font-size: 0.8rem;
+    }
+
+    /* ── Publications ── */
+    .pub-list { display: flex; flex-direction: column; gap: 20px; }
+    .pub-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px;
+      display: flex; gap: 20px; align-items: flex-start;
+      transition: border-color .2s, transform .2s;
+    }
+    .pub-card:hover { border-color: rgba(91,141,238,0.35); transform: translateY(-2px); }
+    .pub-num {
+      font-size: 0.72rem; font-weight: 700; color: var(--accent);
+      background: rgba(91,141,238,0.12); border: 1px solid rgba(91,141,238,0.2);
+      border-radius: 6px; padding: 4px 10px; white-space: nowrap; margin-top: 2px;
+      letter-spacing: 0.05em;
+    }
+    .pub-body {}
+    .pub-title { font-weight: 600; color: #fff; font-size: 0.97rem; margin-bottom: 6px; }
+    .pub-meta { font-size: 0.84rem; color: var(--muted); }
+    .pub-meta em { color: var(--accent); font-style: normal; }
+
+    /* ── Project cards ── */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .proj-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 28px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: border-color .2s, transform .25s;
+      position: relative; overflow: hidden;
+    }
+    .proj-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--grad); opacity: 0; transition: opacity .25s;
+    }
+    .proj-card:hover { border-color: rgba(91,141,238,0.3); transform: translateY(-4px); }
+    .proj-card:hover::before { opacity: 1; }
+    .proj-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .proj-title { font-weight: 700; color: #fff; font-size: 0.97rem; line-height: 1.4; }
+    .proj-year {
+      font-size: 0.75rem; color: var(--muted); font-weight: 500;
+      white-space: nowrap; padding-top: 2px;
+    }
+    .proj-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+    .tag {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+      padding: 4px 10px; border-radius: 99px;
+      background: rgba(91,141,238,0.1); color: var(--accent);
+      border: 1px solid rgba(91,141,238,0.18);
+    }
+
+    /* ── Awards ── */
+    .awards-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+    }
+    .award-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 22px 24px;
+      transition: border-color .2s, transform .2s;
+    }
+    .award-card:hover { border-color: rgba(139,92,246,0.35); transform: translateY(-2px); }
+    .award-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .award-title { font-weight: 600; font-size: 0.95rem; color: #fff; margin-bottom: 4px; line-height: 1.4; }
+    .award-org { font-size: 0.82rem; color: var(--muted); margin-bottom: 4px; }
+    .award-detail-text { font-size: 0.8rem; color: #5b8dee; font-weight: 500; }
+    .award-date-tag {
+      display: inline-block; margin-top: 10px;
+      font-size: 0.72rem; color: var(--muted); font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── Skills ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px;
+    }
+    .skill-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .skill-card-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 0.8rem; font-weight: 500;
+      padding: 5px 12px; border-radius: 8px;
+      background: var(--bg3); color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* ── Education ── */
+    .edu-list { display: flex; flex-direction: column; gap: 20px; }
+    .edu-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px;
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;
+    }
+    .edu-inst { font-weight: 700; color: #fff; font-size: 1rem; margin-bottom: 4px; }
+    .edu-deg { font-size: 0.87rem; color: var(--muted); }
+    .edu-date { font-size: 0.82rem; color: var(--accent); font-weight: 500; white-space: nowrap; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-name {
+      font-family: 'Playfair Display', serif; font-size: 1.4rem; color: #fff; margin-bottom: 6px;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin: 20px 0; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.85rem; color: var(--muted); transition: color .2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.78rem; color: var(--muted); margin-top: 20px; }
+
+    /* ── Scroll reveal ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      section { padding: 72px 20px; }
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-text .bio { margin: 0 auto 32px; }
+      .hero-cta { justify-content: center; }
+      .hero-photo-wrap { order: -1; }
+      .hero-photo-wrap img { max-width: 260px; }
+      .stats-inner { grid-template-columns: repeat(2,1fr); }
+      .tl-item { grid-template-columns: 1fr; gap: 4px; }
+      .tl-date { text-align: left; }
+      .tl-right { border-left: none; padding-left: 0; }
+      .tl-right::before { display: none; }
+      nav .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Seoyun Baek</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#publications">Papers</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#skills">Skills</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section id="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="badge">
+        <span class="badge-dot"></span>
+        Research Intern @ KAIST VL Lab
+      </div>
+      <h1>Seoyun<br /><span>Baek</span></h1>
+      <p class="bio">
+        Undergraduate at <strong>KAIST Industrial &amp; Systems Engineering</strong>,
+        researching <strong>Computer Vision</strong> under Prof. Seunghoon Hong.
+        Interested in machine learning systems that generalize — from visual perception
+        to decision-making under uncertainty.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:ican0534@kaist.ac.kr" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in touch
+        </a>
+        <a href="assets/photo.jpg" class="btn btn-ghost" style="pointer-events:none;cursor:default;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Download CV
+        </a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img src="assets/photo.jpg" alt="Seoyun Baek" />
+    </div>
+  </div>
+</section>
+
+<!-- ── Stats ── -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="reveal">
+      <div class="stat-num">2</div>
+      <div class="stat-label">Publications</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Awards &amp; Honors</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Research Projects</div>
+    </div>
+    <div class="reveal">
+      <div class="stat-num">1st</div>
+      <div class="stat-label">ISEF Korea Rep.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Education ── -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label reveal">Education</p>
+    <h2 class="section-title reveal">Academic Background</h2>
+    <div class="edu-list">
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-inst">Korea Advanced Institute of Science &amp; Technology (KAIST)</div>
+          <div class="edu-deg">B.S. Industrial &amp; Systems Engineering &nbsp;·&nbsp; Daejeon, South Korea</div>
+        </div>
+        <div class="edu-date">Feb 2025 – Present</div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-inst">Korean Minjok Leadership Academy</div>
+          <div class="edu-deg">High School Diploma &nbsp;·&nbsp; Gangwon-do, South Korea</div>
+        </div>
+        <div class="edu-date">Mar 2022 – Feb 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Experience ── -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-label reveal">Work</p>
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="timeline">
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Jun 2026 – Present</div>
+        <div class="tl-right">
+          <div class="tl-title">Research Intern</div>
+          <div class="tl-org">Vision and Learning Laboratory @ KAIST CS</div>
+          <ul class="tl-bullets">
+            <li>Researching Computer Vision under the supervision of Prof. Seunghoon Hong.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Mar 2025 – Jul 2025</div>
+        <div class="tl-right">
+          <div class="tl-title">Research Intern, Software Department</div>
+          <div class="tl-org">PeoplesLeague</div>
+          <ul class="tl-bullets">
+            <li>Organized and led a data labeling team for a cooking-robot segmentation model dataset.</li>
+            <li>Developed a real-time segmentation model identifying safety-critical objects (pots, ingredients, oil, operators).</li>
+            <li>Designed a custom metric penalizing consecutive misclassifications of high-risk classes.</li>
+            <li>Achieved ≥95% safety-compliant frames with max consecutive errors under 10 frames (&lt;2s).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Publications ── -->
+<section id="publications">
+  <div class="section-inner">
+    <p class="section-label reveal">Research</p>
+    <h2 class="section-title reveal">Publications</h2>
+    <div class="pub-list">
+
+      <div class="pub-card reveal">
+        <div class="pub-num">01</div>
+        <div class="pub-body">
+          <div class="pub-title">"Dynamic Asset Allocation with Markowitz Theory and Proximal Policy Optimization"</div>
+          <div class="pub-meta">
+            <strong>Seoyun Baek</strong> (2024) &nbsp;·&nbsp;
+            <em>KNOWLEDGE TO LEAD</em> (ISSN: 2765-0626), Vol. 5, No. 1, pp. 17–22
+          </div>
+        </div>
+      </div>
+
+      <div class="pub-card reveal">
+        <div class="pub-num">02</div>
+        <div class="pub-body">
+          <div class="pub-title">"Emotion Recognition Device for Visually Impaired"</div>
+          <div class="pub-meta">
+            <strong>Seoyun Baek</strong>, Jungwoo Brian Kim, Jihoon Oh (2024) &nbsp;·&nbsp;
+            <em>International Journal of STEAM</em>, Vol. 15, No. 1, pp. 80–83
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Projects ── -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-label reveal">Portfolio</p>
+    <h2 class="section-title reveal">Selected Projects</h2>
+    <div class="projects-grid">
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-title">KAIST-POSTECH-UNIST Data Science Competition</div>
+          <div class="proj-year">2025</div>
+        </div>
+        <div class="proj-desc">
+          Built an ML pipeline on FEM simulation data to predict tire manufacturing defects.
+          Engineered custom features (Target-Aware Correlation Drop, MDFlag) and optimized
+          a weighted TabPFN + Random Forest ensemble on a 15% imbalanced dataset.
+          Designed a profit-maximizing decision algorithm (Good: +100, Defect: −2000).
+        </div>
+        <div class="proj-tags">
+          <span class="tag">TabPFN</span>
+          <span class="tag">Random Forest</span>
+          <span class="tag">Feature Eng.</span>
+          <span class="tag">Imbalanced Data</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-title">Dynamic Asset Allocation — Markowitz + PPO Ensemble</div>
+          <div class="proj-year">2024</div>
+        </div>
+        <div class="proj-desc">
+          Reduced RL volatility by ensembling MVO and PPO asset distribution weights.
+          Backtested on 10 years of S&amp;P 500 data; outperformed standalone Markowitz
+          by 168% and PPO-only by 336% in cumulative return.
+          Maximized both Sharpe and Sortino ratios vs. baselines.
+        </div>
+        <div class="proj-tags">
+          <span class="tag">Reinforcement Learning</span>
+          <span class="tag">Finance</span>
+          <span class="tag">PPO</span>
+          <span class="tag">MVO</span>
+        </div>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-title">Emotion Recognition Wearable for Visually Impaired</div>
+          <div class="proj-year">2023–24</div>
+        </div>
+        <div class="proj-desc">
+          Glasses-shaped wearable conveying emotions via vibration.
+          98.55% FER accuracy (Xception) and 97.25% SER accuracy (Conv1D + LSTM).
+          Real-time BLE communication with ESP32, controlled by a Flutter app.
+        </div>
+        <div class="proj-tags">
+          <span class="tag">Multimodal DL</span>
+          <span class="tag">Flutter</span>
+          <span class="tag">ESP32</span>
+          <span class="tag">Embedded</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Awards ── -->
+<section id="awards">
+  <div class="section-inner">
+    <p class="section-label reveal">Recognition</p>
+    <h2 class="section-title reveal">Honors &amp; Awards</h2>
+    <div class="awards-grid">
+
+      <div class="award-card reveal">
+        <div class="award-icon">🏆</div>
+        <div class="award-title">Grand Prize — KISTI &amp; UNIST Supercomputing Challenge</div>
+        <div class="award-org">KISTI &amp; UNIST</div>
+        <div class="award-detail-text">1st place among 298 teams nationwide · Team leader</div>
+        <div class="award-date-tag">Jul 2023</div>
+      </div>
+
+      <div class="award-card reveal">
+        <div class="award-icon">🥇</div>
+        <div class="award-title">Gold Medal — Korea Science &amp; Engineering Fair</div>
+        <div class="award-org">KSS</div>
+        <div class="award-detail-text">1st place among 300+ papers nationwide</div>
+        <div class="award-date-tag">Feb 2024</div>
+      </div>
+
+      <div class="award-card reveal">
+        <div class="award-icon">🌏</div>
+        <div class="award-title">Finalist — International Science &amp; Engineering Fair (ISEF)</div>
+        <div class="award-org">Regeneron &amp; Society for Science</div>
+        <div class="award-detail-text">Selected as representative of South Korea</div>
+        <div class="award-date-tag">May 2024</div>
+      </div>
+
+      <div class="award-card reveal">
+        <div class="award-icon">💡</div>
+        <div class="award-title">4th Industrial Revolution POWER KOREA Scholarship</div>
+        <div class="award-org">National Assembly of Korea</div>
+        <div class="award-detail-text">Scholarship for Talented</div>
+        <div class="award-date-tag">Aug 2024</div>
+      </div>
+
+      <div class="award-card reveal">
+        <div class="award-icon">🎖️</div>
+        <div class="award-title">3rd Prize — International Youth Research Paper Competition</div>
+        <div class="award-org">HOBY</div>
+        <div class="award-detail-text">Among 300+ papers submitted worldwide</div>
+        <div class="award-date-tag">Sep 2024</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── Skills ── -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-label reveal">Toolkit</p>
+    <h2 class="section-title reveal">Skills</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-card-label">Languages</div>
+        <div class="skill-chips">
+          <span class="chip">Python</span>
+          <span class="chip">C</span>
+          <span class="chip">C++</span>
+          <span class="chip">Java</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-label">Frameworks &amp; Tools</div>
+        <div class="skill-chips">
+          <span class="chip">PyTorch</span>
+          <span class="chip">TensorFlow</span>
+          <span class="chip">OpenCV</span>
+          <span class="chip">CUDA</span>
+          <span class="chip">NumPy</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">Seaborn</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-label">Hardware</div>
+        <div class="skill-chips">
+          <span class="chip">Jetson Nano</span>
+          <span class="chip">Arduino</span>
+          <span class="chip">ESP32</span>
+        </div>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-label">Human Languages</div>
+        <div class="skill-chips">
+          <span class="chip">Korean (Native)</span>
+          <span class="chip">English (Fluent)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-name">Seoyun Baek</div>
+    <p style="font-size:.85rem;color:var(--muted);">KAIST · Machine Learning &amp; Computer Vision</p>
+    <div class="footer-links">
+      <a href="mailto:ican0534@kaist.ac.kr">ican0534@kaist.ac.kr</a>
+      <a href="mailto:bsy2430735@gmail.com">bsy2430735@gmail.com</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Seoyun Baek. Built with HTML &amp; CSS.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 80}ms`;
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
