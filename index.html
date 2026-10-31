@@ -11,19 +11,19 @@
     /* ── Reset & Tokens ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Palette: night sky (bg), streetlight gold (accent), brick coral, blossom pink (accent2) */
+    /* Palette: plum-navy night sky (bg), dusty rose blossoms (accent), lilac garden lights (accent2) */
     :root {
-      --bg:        #070d22;
-      --bg2:       #0c1530;
-      --bg3:       #141f40;
-      --border:    rgba(255,236,200,0.08);
-      --text:      #f1ece2;
-      --muted:     #9ba3bc;
-      --accent:    #f2c46d;
-      --accent2:   #e889b5;
-      --accent-rgb:  242,196,109;
-      --accent2-rgb: 232,137,181;
-      --grad:      linear-gradient(135deg, #f2c46d, #e8907a 55%, #e889b5);
+      --bg:        #0a0a1f;
+      --bg2:       #12112a;
+      --bg3:       #1c1937;
+      --border:    rgba(255,220,235,0.08);
+      --text:      #f4edf1;
+      --muted:     #a8a2ba;
+      --accent:    #e8a6bf;
+      --accent2:   #b9a0dc;
+      --accent-rgb:  232,166,191;
+      --accent2-rgb: 185,160,220;
+      --grad:      linear-gradient(135deg, #f7d6df, #e49bb7 50%, #b892d4);
       --radius:    14px;
       --nav-h:     64px;
     }
@@ -40,7 +40,7 @@
     }
 
     a { color: var(--accent); text-decoration: none; transition: color .2s; }
-    a:hover { color: #ffdc9a; }
+    a:hover { color: #f7cfdd; }
 
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 6px; }
@@ -62,7 +62,7 @@
       height: var(--nav-h);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      background: rgba(7,13,34,0.75);
+      background: rgba(10,10,31,0.75);
       border-bottom: 1px solid var(--border);
       z-index: 999;
       display: flex; align-items: center;
@@ -164,9 +164,9 @@
       transition: all .2s; border: none;
     }
     .btn-primary {
-      background: var(--grad); color: #0a1230;
+      background: var(--grad); color: #1c1026;
     }
-    .btn-primary:hover { opacity: .88; transform: translateY(-1px); color: #0a1230; }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); color: #1c1026; }
     .btn-ghost {
       background: var(--bg3); color: var(--text);
       border: 1px solid var(--border);
